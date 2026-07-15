@@ -1,0 +1,72 @@
+@model List<StudentManagementSystem.Models.Student>
+
+@{
+    ViewData["Title"] = "Student List";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>🎓 Student Management System</h2>
+
+        <a asp-action="Create" class="btn btn-primary">
+            + Add Student
+        </a>
+    </div>
+
+    <table class="table table-bordered table-hover">
+
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th width="180">Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        @if(Model.Count == 0)
+        {
+            <tr>
+                <td colspan="5" class="text-center">
+                    No Students Found
+                </td>
+            </tr>
+        }
+
+        @foreach(var student in Model)
+        {
+            <tr>
+
+                <td>@student.Id</td>
+                <td>@student.Name</td>
+                <td>@student.Email</td>
+                <td>@student.Age</td>
+
+                <td>
+
+                    <a asp-action="Edit"
+                       asp-route-id="@student.Id"
+                       class="btn btn-warning btn-sm">
+                        Edit
+                    </a>
+
+                    <a asp-action="Delete"
+                       asp-route-id="@student.Id"
+                       class="btn btn-danger btn-sm">
+                        Delete
+                    </a>
+
+                </td>
+
+            </tr>
+        }
+
+        </tbody>
+
+    </table>
+
+</div>
